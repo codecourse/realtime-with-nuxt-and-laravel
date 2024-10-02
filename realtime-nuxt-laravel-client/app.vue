@@ -18,6 +18,8 @@ const sendRequest = () => {
 </script>
 
 <template>
+  <Navigation />
+
   <div>
     <button v-on:click="sendRequest">Send request</button>
 
