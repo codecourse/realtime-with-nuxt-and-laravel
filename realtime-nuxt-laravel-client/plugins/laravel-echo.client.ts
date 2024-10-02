@@ -3,6 +3,7 @@ import Pusher from 'pusher-js'
 
 export default defineNuxtPlugin(() => {
     const config = useRuntimeConfig()
+    const sanctumFetch = useSanctumClient()
 
     window.Pusher = Pusher
 
@@ -12,6 +13,25 @@ export default defineNuxtPlugin(() => {
         wsHost: config.public.REVERB_HOST,
         wsPort: 8080,
         cluster: 'mt1',
-        forceTLS: false
+        forceTLS: false,
+        authorizer: (channel: any) => {
+            return {
+                authorize: (socketId: string, callback: Function) => {
+                    sanctumFetch('/api/broadcasting/auth', {
+                        method: 'POST',
+                        body: {
+                            socket_id: socketId,
+                            channel_name: channel.name
+                        },
+                        onResponse({ response }) {
+                            callback(false, response._data)
+                        },
+                        onResponseError({ response }) {
+                            //
+                        }
+                    })
+                }
+            }
+        }
     })
 })
