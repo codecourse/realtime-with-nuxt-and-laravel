@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const strings = ref(<string[]>[])
 const config = useRuntimeConfig()
+const sanctumFetch = useSanctumClient()
 
 onMounted(() => {
   window.Echo.channel('public')
@@ -10,8 +11,7 @@ onMounted(() => {
 })
 
 const sendRequest = () => {
-  $fetch('/api/realtime', {
-    baseURL: config.public.API_URL,
+  sanctumFetch('/api/realtime', {
     method: 'POST'
   })
 }
