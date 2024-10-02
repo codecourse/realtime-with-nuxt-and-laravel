@@ -25,6 +25,8 @@ const sendRequest = () => {
 <template>
   <Navigation />
 
+  <Whisper />
+
   <div>
     <button v-on:click="sendRequest">Send request</button>
 
