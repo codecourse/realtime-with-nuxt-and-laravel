@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const strings = ref(<string[]>[])
+const config = useRuntimeConfig()
 
 onMounted(() => {
   window.Echo.channel('public')
@@ -9,7 +10,8 @@ onMounted(() => {
 })
 
 const sendRequest = () => {
-  $fetch('http://realtime-nuxt-laravel.test/api/realtime', {
+  $fetch('/api/realtime', {
+    baseURL: config.public.API_URL,
     method: 'POST'
   })
 }

@@ -7,5 +7,12 @@ export default defineNuxtConfig({
   },
   plugins: [
       '~/plugins/laravel-echo.client'
-  ]
+  ],
+  runtimeConfig: {
+    public: {
+      API_URL: process.env.API_URL,
+      REVERB_KEY: process.env.REVERB_KEY,
+      REVERB_HOST: process.env.REVERB_HOST,
+    }
+  }
 })
