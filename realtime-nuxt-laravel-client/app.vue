@@ -4,9 +4,14 @@ const config = useRuntimeConfig()
 const sanctumFetch = useSanctumClient()
 
 onMounted(() => {
-  window.Echo.channel('public')
-      .listen('ExampleEvent', (e: ExampleEvent) => {
-          strings.value.push(e.string)
+  // window.Echo.channel('public')
+  //     .listen('ExampleEvent', (e: ExampleEvent) => {
+  //         strings.value.push(e.string)
+  //     })
+
+  window.Echo.private('private')
+      .listen('ExampleEventPrivate', (e: ExampleEvent) => {
+        strings.value.push(e.string)
       })
 })
 
